@@ -213,13 +213,11 @@ public class ContactosCovid {
 	}
 
 	private String[] dividirEntrada(String input) {
-		String cadenas[] = input.split("\\n");
-		return cadenas;
+		return input.split("\\n");
 	}
 
 	private String[] dividirLineaData(String data) {
-		String cadenas[] = data.split("\\;");
-		return cadenas;
+		return data.split("\\;");
 	}
 
 	private Persona crearPersona(String[] data) {
@@ -281,28 +279,29 @@ public class ContactosCovid {
 		}
 		return posicionPersona;
 	}
+
+	private int[] parsearDMA(String fecha) {
+		String[] valores = fecha.split("\\/");
+		int dia = Integer.parseInt(valores[0]);
+		int mes = Integer.parseInt(valores[1]);
+		int anio = Integer.parseInt(valores[2]);
+
+		return new int[]{ dia, mes, anio };
+	}
 	
 	private FechaHora parsearFecha (String fecha) {
-		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
-		dia = Integer.parseInt(valores[0]);
-		mes = Integer.parseInt(valores[1]);
-		anio = Integer.parseInt(valores[2]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, 0, 0);
-		return fechaHora;
+		int[] dma = parsearDMA(fecha);
+		return new FechaHora(dma[0], dma[1], dma[2], 0, 0);
 	}
 	
 	private FechaHora parsearFecha (String fecha, String hora) {
-		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
-		dia = Integer.parseInt(valores[0]);
-		mes = Integer.parseInt(valores[1]);
-		anio = Integer.parseInt(valores[2]);
+		int[] dma = parsearDMA(fecha);
 		int minuto, segundo;
-		valores = hora.split("\\:");
+
+		String[] valores = hora.split("\\:");
 		minuto = Integer.parseInt(valores[0]);
 		segundo = Integer.parseInt(valores[1]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, minuto, segundo);
-		return fechaHora;
+
+		return new FechaHora(dma[0], dma[1], dma[2], minuto, segundo);
 	}
 }
