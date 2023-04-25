@@ -52,7 +52,7 @@ public class Localizacion {
 	    int pos=-1;
 	    int i;
 	    /**
-	     *  Busca la localización, sino existe lanza una excepción
+	     *  Busca la localización, si no existe lanza una excepción
 	     */
 	    try {
 			pos = findLocalizacion(documento, fecha, hora);
@@ -97,29 +97,29 @@ public class Localizacion {
 		
 		return cadena;		
 	}
-	
-	@SuppressWarnings("unused")
-	private FechaHora parsearFecha (String fecha) {
+
+	private int[] ParsearDMA (String fecha){
 		int dia, mes, anio;
 		String[] valores = fecha.split("\\/");
 		dia = Integer.parseInt(valores[0]);
 		mes = Integer.parseInt(valores[1]);
 		anio = Integer.parseInt(valores[2]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, 0, 0);
+		return new int[] {dia, mes, anio};
+	}
+	@SuppressWarnings("unused")
+	private FechaHora parsearFecha (String fecha) {
+		int dma[] = ParsearDMA(fecha);
+		FechaHora fechaHora = new FechaHora(dma[0], dma[1], dma[2], 0, 0);
 		return fechaHora;
 	}
 	
 	private  FechaHora parsearFecha (String fecha, String hora) {
-		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
-		dia = Integer.parseInt(valores[0]);
-		mes = Integer.parseInt(valores[1]);
-		anio = Integer.parseInt(valores[2]);
+		int dma[] = ParsearDMA(fecha);
 		int minuto, segundo;
-		valores = hora.split("\\:");
+		String[] valores = hora.split("\\:");
 		minuto = Integer.parseInt(valores[0]);
 		segundo = Integer.parseInt(valores[1]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, minuto, segundo);
+		FechaHora fechaHora = new FechaHora(dma[0], dma[1], dma[2], minuto, segundo);
 		return fechaHora;
 	}
 	
