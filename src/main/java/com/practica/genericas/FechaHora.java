@@ -79,6 +79,7 @@ public class FechaHora implements Comparable<FechaHora>{
 		public String toString() {
 			return String.format("%02d:%02d", hora,minuto);
 		}
+
 		
 
 	}
@@ -146,6 +147,5 @@ public class FechaHora implements Comparable<FechaHora>{
 		
 		return dateTime1.compareTo(dateTime2);
 	}
-	
-	
+
 }

@@ -56,5 +56,12 @@ public class Coordenada {
 			return false;
 		return true;
 	}
+
+	public String toString() {
+		String cadena = "";
+		cadena+=String.format("%.4f;%.4f\n", getLatitud(), getLongitud());
+
+		return cadena;
+	}
 	
 }

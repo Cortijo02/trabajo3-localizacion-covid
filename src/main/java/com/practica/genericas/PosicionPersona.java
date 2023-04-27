@@ -26,16 +26,10 @@ public class PosicionPersona {
 	@Override
 	public String toString() {
 		String cadena = "";
-        cadena += String.format("%s;", getDocumento());
+        cadena += getDocumento();
         FechaHora fecha = getFechaPosicion();        
-        cadena+=String.format("%02d/%02d/%04d;%02d:%02d;", 
-	        		fecha.getFecha().getDia(), 
-	        		fecha.getFecha().getMes(), 
-	        		fecha.getFecha().getAnio(),
-	        		fecha.getHora().getHora(),
-	        		fecha.getHora().getMinuto());
-        cadena+=String.format("%.4f;%.4f\n", getCoordenada().getLatitud(), 
-	        		getCoordenada().getLongitud());
+        cadena+= fecha.getFecha().toString() + fecha.getHora().toString();
+		cadena+=getCoordenada().toString();
 	
 		return cadena;
 	}
